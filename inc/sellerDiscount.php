@@ -1,5 +1,5 @@
 <?php
-class userBasedDiscount
+class sellerDiscount
 {
     function __construct()
     {
@@ -36,4 +36,4 @@ class userBasedDiscount
         }
     }
 }
-new userBasedDiscount();
+new sellerDiscount();

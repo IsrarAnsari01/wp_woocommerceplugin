@@ -33,11 +33,10 @@ if (!defined("CW_PLUGIN_DIR")) {
 // Check the avalibilty of woocommerce plugin
 $active_plugins = (array) get_option('active_plugins', array());
 if (in_array('woocommerce/woocommerce.php', $active_plugins) || array_key_exists('woocommerce/woocommerce.php', $active_plugins)) {
-    require plugin_dir_path(__FILE__) . "inc/customWooCTab.php";
-    require plugin_dir_path(__FILE__) . "inc/customUserRole.php";
-    require plugin_dir_path(__FILE__) . "inc/userBasedDiscount.php";
-    require plugin_dir_path(__FILE__) . "inc/customFieldInCheckout.php";
+    require plugin_dir_path(__FILE__) . "inc/sellerTabInProductTab.php";
+    require plugin_dir_path(__FILE__) . "inc/preDefinedUserRole.php";
+    require plugin_dir_path(__FILE__) . "inc/sellerDiscount.php";
+    require plugin_dir_path(__FILE__) . "inc/dateFieldInCheckout.php";
     require plugin_dir_path(__FILE__) . "inc/countryConfigration.php";
     require plugin_dir_path(__FILE__) . "inc/iaPaymentForWoocommerce.php";
 }
-// wp_enqueue_script("datePickerJs", plugin_dir_path(__FILE__) . "assets/js/main.js", array("jquery"), rand(), false);

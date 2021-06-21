@@ -1,5 +1,5 @@
 <?php
-class customFieldInCheckout
+class dateFieldInCheckout
 {
     function __construct()
     {
@@ -107,4 +107,4 @@ class customFieldInCheckout
         $log->add('WooCommerenceDebugging', $log_entry);
     }
 }
-new customFieldInCheckout();
+new dateFieldInCheckout();
