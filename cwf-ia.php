@@ -8,15 +8,15 @@
  *
  * @wordpress-plugin
  * Plugin Name:       IA-CWF
- * Plugin URI:        https://example.com/plugin-name
- * Description:       This plugin will add seller information and display them in single product page 
- *                    | We give 10% off to seller 
- * Version:           1.0.0
- * Author:            IA
- * Author URI:        https://example.com
+ * Plugin URI:        https://github.com/IsrarAnsari01
+ * Description:       Seller Product data tab that is use to get the basic information of seller and display them in single product page
+ *                    |Age based restriction in checkout you can manunally add minimun age to checkout accourding to your store location | Pre-defined user based discount | Custom Payment gateway and integration with stripe
+ * Version:           1.2.0
+ * Author:            Israr Ansari
+ * Author URI:        https://github.com/IsrarAnsari01
  * Text Domain:       iawcf-Like
  * License:           GPL2
- * License URI:       http://www.gnu.org/licenses/gpl-2.0.html
+ * License URI:       https://github.com/IsrarAnsari01
  */
 // Block user to access it directly
 if (!defined('WPINC')) {
@@ -24,7 +24,7 @@ if (!defined('WPINC')) {
 }
 // Define Constant
 if (!defined("CW_ PLUGIN_VERSION")) {
-    define("CW_ PLUGIN_VERSION", "1.0.0");
+    define("CW_ PLUGIN_VERSION", "1.2.0");
 }
 // Define constant for directory
 if (!defined("CW_PLUGIN_DIR")) {
@@ -38,5 +38,6 @@ if (in_array('woocommerce/woocommerce.php', $active_plugins) || array_key_exists
     require plugin_dir_path(__FILE__) . "inc/userBasedDiscount.php";
     require plugin_dir_path(__FILE__) . "inc/customFieldInCheckout.php";
     require plugin_dir_path(__FILE__) . "inc/countryConfigration.php";
-    require plugin_dir_path(__FILE__) . "inc/ia-payment-for-woocommerce.php";
+    require plugin_dir_path(__FILE__) . "inc/iaPaymentForWoocommerce.php";
 }
+// wp_enqueue_script("datePickerJs", plugin_dir_path(__FILE__) . "assets/js/main.js", array("jquery"), rand(), false);

@@ -1,5 +1,10 @@
 <?php
-// This is table head
+
+/**
+ * This function will create table head
+ * @param array $tabs 
+ * @return updated array $tabs
+ */
 add_filter('woocommerce_product_data_tabs', 'seller_product_settings_tabs');
 function seller_product_settings_tabs($tabs)
 {
@@ -11,7 +16,11 @@ function seller_product_settings_tabs($tabs)
     );
     return $tabs;
 }
-// This is table content which is open on click
+/**
+ * This is table content which is open on click
+ * @param NULL
+ * @return NULL
+ */
 add_action('woocommerce_product_data_panels', 'seller_information_product_panel');
 function seller_information_product_panel()
 {
@@ -39,7 +48,11 @@ function seller_information_product_panel()
     ));
     echo '</div>';
 }
-// Saving data of custom field
+/**
+ * Saving data of custom field
+ * @param NULL
+ * @return NULL
+ */
 add_action('woocommerce_process_product_meta', 'woocommerce_product_custom_fields_save');
 function woocommerce_product_custom_fields_save()
 {
@@ -58,7 +71,11 @@ function woocommerce_product_custom_fields_save()
         update_post_meta($post_id, 'seller_number', esc_html($woocommerce_custom_product_number_field));
 }
 
-// Change Icon
+/**
+ * Change table head ICON
+ * @param NULL
+ * @return NULL
+ */
 add_action('admin_head', 'seller_css_icon');
 function seller_css_icon()
 {
@@ -70,7 +87,11 @@ function seller_css_icon()
 }
 
 
-// Retrive Meta information 
+/**
+ * Retrive Meta information
+ * @param NULL
+ * @return NULL
+ */
 
 function sellerInformation()
 {

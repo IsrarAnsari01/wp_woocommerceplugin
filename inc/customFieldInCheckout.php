@@ -22,6 +22,7 @@ class customFieldInCheckout
 
         // Load the datepicker jQuery-ui plugin script
         wp_enqueue_script('jquery-ui-datepicker');
+        wp_enqueue_script("datePickerJs", CW_PLUGIN_DIR . "assets/js/main.js", array("jquery", "jquery-ui-datepicker"), rand(), false);
     }
 
     /**
@@ -43,17 +44,9 @@ class customFieldInCheckout
             'label'         => __('Enter your DOB'),
             'placeholder'       => __('Selectn your DOB'),
         ), $checkout->get_value($datepicker_slug));
-
         echo '</div>';
 ?>
-        <script language="javascript">
-            jQuery(function($) {
-                var a = '#<?php echo $datepicker_slug ?>';
-                $(a).datepicker({
-                    dateFormat: 'yy-mm-dd',
-                });
-            });
-        </script>
+    
 <?php
     }
 
