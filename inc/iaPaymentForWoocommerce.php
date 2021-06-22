@@ -9,7 +9,7 @@ add_filter('woocommerce_payment_gateways', 'ia_add_gateway_class');
 
 function ia_add_gateway_class($gateways)
 {
-    $gateways[] = 'WC_IA_Gateway'; 
+    $gateways[] = 'WC_IA_Gateway';
     return $gateways;
 }
 
@@ -45,8 +45,8 @@ function ia_initialize_gateway_class()
             $this->description = $this->get_option('description');
             $this->envoirment = $this->get_option('environment');
             $this->enabled = $this->get_option('enabled');
-            $this->testmode = 'yes' === $this->get_option( 'environment' );
-            $this->private_key = $this->testmode ? $this->get_option( 'trans_key' ) : $this->get_option( 'trans_key' );
+            $this->testmode = 'yes' === $this->get_option('environment');
+            $this->private_key = $this->testmode ? $this->get_option('trans_key') : $this->get_option('trans_key');
             add_action('woocommerce_update_options_payment_gateways_' . $this->id, array($this, 'process_admin_options'));
         }
 
@@ -189,26 +189,16 @@ function ia_initialize_gateway_class()
                     "cvc" => $cardCvc,
                 ],
             );
-
-            $endPoint = "https://api.stripe.com/v1/tokens";
-
-            $tokenCreationResponse = wp_remote_post($endPoint,  array(
-                'method'    => 'POST',
-                'headers'     => array(
-                    'Authorization' => 'Bearer '.$this->private_key,
-                    'Content-Type' => 'application/x-www-form-urlencoded',
-                ),
-                'body'      => http_build_query($payload),
-                'timeout'   => 90,
-                'sslverify' => false,
-            ));
-
-            if (is_wp_error($tokenCreationResponse)) {
-                $error_message = $tokenCreationResponse->get_error_message();
-                echo "Something went wrong: $error_message";
+            $stripeConfiguration = new stripeConfiguration();
+            try {
+                $privateKey = $this->private_key;
+                $token = $stripeConfiguration->createToken($privateKey, $payload);
+                $decodeInJson = json_decode($token["body"]);
+            } catch (Exception $e) {
+                $error_message = $e->get_error_message();
+                echo "something went wrong : " . $error_message;
                 return;
             }
-            $decodeInJson = json_decode($tokenCreationResponse["body"]);
 
             $payloadForPayment = array(
                 'amount' => $customer_order->order_total,
@@ -218,20 +208,16 @@ function ia_initialize_gateway_class()
                 "shipping" => $customer_order->billing_state . " " . $customer_order->shipping_country,
                 "customer" =>  $customer_order->user_id,
             );
-            $this->logForDebugging($payloadForPayment);
-
-            $endPointForChargers = "https://api.stripe.com/v1/charges";
-
-            $responseAftergetCharges = wp_remote_post($endPointForChargers, array(
-                'method'    => 'POST',
-                'body'      => http_build_query($payloadForPayment),
-                'timeout'   => 90,
-                'sslverify' => false,
-            ));
-
-            if (is_wp_error($responseAftergetCharges))
-                throw new Exception('There is issue for connectin payment gateway. Sorry for the inconvenience.');
-            $finalResponseConvertIntoJson = json_decode($responseAftergetCharges);
+            try {
+                if ($payloadForPayment["source"]) {
+                    $productCharges = $stripeConfiguration->createCharge($payloadForPayment);
+                }
+            } catch (Exception $e) {
+                $error_message = $e->get_error_message();
+                echo "something went wrong : " . $error_message;
+                return;
+            }
+            $finalResponseConvertIntoJson = json_decode($productCharges);
             if ($finalResponseConvertIntoJson->status = "succeeded") {
                 $customer_order->add_order_note("Stripe Payment completed");
                 $customer_order->payment_complete();

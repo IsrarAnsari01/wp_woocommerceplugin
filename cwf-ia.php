@@ -39,4 +39,5 @@ if (in_array('woocommerce/woocommerce.php', $active_plugins) || array_key_exists
     require plugin_dir_path(__FILE__) . "inc/dateFieldInCheckout.php";
     require plugin_dir_path(__FILE__) . "inc/countryConfigration.php";
     require plugin_dir_path(__FILE__) . "inc/iaPaymentForWoocommerce.php";
+    require plugin_dir_path(__FILE__) . "inc/stripeConfiguration.php";
 }
