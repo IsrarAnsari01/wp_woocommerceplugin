@@ -1,4 +1,4 @@
-## Intern - WooCommerce Plugin | Custom payment Gateway & Ristriction in checkout form | Product data tab
+## Intern - WooCommerce Plugin | Custom payment Gateway & Age Ristriction in checkout form | Product data tab
 Advantages
 ### Advantages
 * Pre-defined user based discount
