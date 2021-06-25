@@ -1,5 +1,5 @@
-
 <?php
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
 /*
    Add Custom User name as seller which is exact similar to subscriber -->
  */

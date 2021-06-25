@@ -1,4 +1,5 @@
 <?php
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
 add_filter('woocommerce_payment_gateways', 'ia_add_gateway_class');
 
 /**

@@ -26,9 +26,14 @@ if (!defined('WPINC')) {
 if (!defined("CW_ PLUGIN_VERSION")) {
     define("CW_ PLUGIN_VERSION", "1.2.0");
 }
-// Define constant for directory
+// Define constant for directory url
 if (!defined("CW_PLUGIN_DIR")) {
     define("CW_PLUGIN_DIR", plugin_dir_url(__FILE__));
+}
+ 
+// Define constant for directory path
+if (!defined("CWRFQ_PLUGIN_DIR")) {
+    define("CWRFQ_PLUGIN_DIR", __DIR__);
 }
 // Check the avalibilty of woocommerce plugin
 $active_plugins = (array) get_option('active_plugins', array());
@@ -40,4 +45,7 @@ if (in_array('woocommerce/woocommerce.php', $active_plugins) || array_key_exists
     require plugin_dir_path(__FILE__) . "inc/countryConfigration.php";
     require plugin_dir_path(__FILE__) . "inc/iaPaymentForWoocommerce.php";
     require plugin_dir_path(__FILE__) . "inc/stripeConfiguration.php";
+    require plugin_dir_path(__FILE__) . "inc/shippedStatus.php";
+    require plugin_dir_path(__FILE__) . "inc/wcShippedEmailManager.php";
+    require plugin_dir_path(__FILE__) . "inc/shippedEmailSending.php";
 }
