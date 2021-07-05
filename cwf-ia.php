@@ -10,7 +10,7 @@
  * Plugin Name:       IA-CWF
  * Plugin URI:        https://github.com/IsrarAnsari01
  * Description:       Seller Product data tab that is use to get the basic information of seller and display them in single product page
- *                    |Age based restriction in checkout you can manunally add minimun age to checkout accourding to your store location | Pre-defined user based discount | Custom Payment gateway and integration with stripe
+ *                    |Age based restriction in checkout you can manunally add minimun age to checkout accourding to your store location | Pre-defined user based discount | Custom Payment gateway and integration with stripe | Shipped order status | Shipped woocommerce email | Shipped woocommmerce email send to the customer when the order status equal to Shipped
  * Version:           1.2.0
  * Author:            Israr Ansari
  * Author URI:        https://github.com/IsrarAnsari01
@@ -48,4 +48,7 @@ if (in_array('woocommerce/woocommerce.php', $active_plugins) || array_key_exists
     require plugin_dir_path(__FILE__) . "inc/shippedStatus.php";
     require plugin_dir_path(__FILE__) . "inc/wcShippedEmailManager.php";
     require plugin_dir_path(__FILE__) . "inc/shippedEmailSending.php";
+    require plugin_dir_path(__FILE__) . "inc/countryRestrictionTab.php";
+    require plugin_dir_path(__FILE__) . "inc/hideProducts.php";
+    require plugin_dir_path(__FILE__) . "inc/mulipleCountryBasedRestriction.php";
 }
