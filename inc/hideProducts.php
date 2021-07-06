@@ -21,6 +21,8 @@ class hideProducts
         $this->restrictedCountry = $restrictedArray["country"];
         $this->restrictedProducts = $restrictedArray["products"];
         $this->restrictedCetagories = $restrictedArray["cetagory"];
+        $multiRestriction = get_option( "country_based_restriction", [] );
+        $this->logForDebugging($multiRestriction);
     }
 
     public function update_restriction($q)
@@ -29,6 +31,12 @@ class hideProducts
             $q->set('tax_query', $this->restrictedCetagories);
             $q->set('post__not_in', $this->restrictedProducts);
         }
+    }
+    function logForDebugging($state_array)
+    {
+        $log = new WC_Logger();
+        $log_entry = print_r($state_array, true);
+        $log->add('multi_country_restriction', $log_entry);
     }
 }
 new hideProducts();
