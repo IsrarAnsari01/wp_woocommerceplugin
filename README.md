@@ -1,4 +1,4 @@
-## Intern - WooCommerce Extend Plugin
+## Intern - WooCommerce Extended Plugin
 ### Advantages
 * Pre-defined user based discount
 * Custom Payment gateway
