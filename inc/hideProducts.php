@@ -15,21 +15,32 @@ class hideProducts
 
     public function getRestrictedValues()
     {
+        // For single country 
+
+        // $restrictedArray = get_option('ia-country-restriction', []);
+        // $this->restrictedCountry = $restrictedArray["country"];
+        // $this->restrictedProducts = $restrictedArray["products"];
+        // $this->restrictedCetagories = $restrictedArray["cetagory"];
+
+        // For multiple countries
         $location = wc_get_base_location();
         $this->base_country = $location["country"];
-        $restrictedArray = get_option('ia-country-restriction', []);
-        $this->restrictedCountry = $restrictedArray["country"];
-        $this->restrictedProducts = $restrictedArray["products"];
-        $this->restrictedCetagories = $restrictedArray["cetagory"];
-        $multiRestriction = get_option( "country_based_restriction", [] );
-        $this->logForDebugging($multiRestriction);
+        $multiRestriction = get_option("country_based_restriction", []);
+        for ($i = 0; $i < sizeof($multiRestriction); $i++) {
+            if ($multiRestriction[$i]["restrictedCountry"] == $this->base_country) {
+                $this->restrictedProducts = $multiRestriction[$i]["restrictedProducts"];
+                $this->restrictedCetagories = $multiRestriction[$i]["restrictedCetagories"];
+            }
+        }
     }
 
     public function update_restriction($q)
     {
-        if ($this->base_country == $this->restrictedCountry) {
-            $q->set('tax_query', $this->restrictedCetagories);
+        if (sizeof($this->restrictedProducts)) {
             $q->set('post__not_in', $this->restrictedProducts);
+        }
+        if (sizeof($this->restrictedCetagories)) {
+            $q->set('tax_query', $this->restrictedCetagories);
         }
     }
     function logForDebugging($state_array)

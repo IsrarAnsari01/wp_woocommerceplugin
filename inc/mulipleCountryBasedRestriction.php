@@ -26,7 +26,8 @@ class mulipleCountryBasedRestriction
     function __construct()
     {
         add_action('admin_menu', array($this, 'initailize_page_configuration'));
-        add_action('admin_init', array($this, 'initizeBasicSetting'));
+        add_action('init', array($this, 'initizeBasicSetting'));
+        add_action('init', array($this, 'initializeRuleFunc'));
         add_action('admin_enqueue_scripts', array($this, "enable_scripts"));
         add_action('wp_ajax_' . self::$action, array($this, 'multi_autocomplete_suggestions_product'));
         add_action('wp_ajax_' . self::$actionForCat, array($this, 'multi_autocomplete_suggestions_cetagory'));
@@ -118,20 +119,14 @@ class mulipleCountryBasedRestriction
     }
 
     /**
-     * This will create main layout of the page | all the things in page write here
+     * Save Rules in Database
      * @param NULL
      * @return NULL
      */
 
-
-    public function create_admin_page()
-
+    public function initializeRuleFunc()
     {
-
         if (isset($_POST["restrictBtn"])) {
-            echo "<pre>" .
-                print_r($_POST, 1)
-                . "</pre>";
             $rules = [];
             $this->selectedCountry = $_POST["restrictedCountries"];
             $this->selectedProducts = $_POST["restrictedProducts"];
@@ -145,6 +140,19 @@ class mulipleCountryBasedRestriction
             }
             update_option('country_based_restriction', $rules);
         }
+        $this->initizeBasicSetting();
+    }
+
+    /**
+     * This will create main layout of the page | all the things in page write here
+     * @param NULL
+     * @return NULL
+     */
+
+
+    public function create_admin_page()
+    {
+
 ?>
         <div class="wrap">
             <h1>Welcome Dude, Add multiple countries Based Restriction</h1>
@@ -204,6 +212,7 @@ class mulipleCountryBasedRestriction
                             }
                         }
                         ?>
+                        <!-- Initially visiblity of this row is hidden -->
                         <tr class="empty-row screen-reader-text">
                             <td>
                                 <label for="countries">Select Country</label> <br>

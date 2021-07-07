@@ -76,7 +76,13 @@ jQuery(document).ready(function ($) {
    */
 
   $(".forDataInsertion").each(function (index, el) {
-    console.log($(el).find(".restrictedProducts"));
+    const randomNumber = Math.floor(Math.random() * 100) + 1;
+    $(el)
+      .find("select")
+      .each(function () {
+        let fieldName = $(this).attr("name");
+        $(this).attr("name", fieldName + "[" + randomNumber + "][]");
+      });
     $(el)
       .find(".restrictedProducts")
       .select2({
