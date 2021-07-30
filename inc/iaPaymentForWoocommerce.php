@@ -224,7 +224,7 @@ function ia_initialize_gateway_class()
                 $customer_order->payment_complete();
                 $woocommerce->cart->empty_cart();
                 $customer_order->reduce_order_stock();
-                $customer_order->update_status('on-hold',  'Awaiting IA Payments');
+                $customer_order->update_status('Completed',  'Awaiting IA Payments');
                 $this->logForDebugging("Hello inside if condition");
                 return array(
                     'result'   => 'success',

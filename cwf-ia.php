@@ -51,4 +51,6 @@ if (in_array('woocommerce/woocommerce.php', $active_plugins) || array_key_exists
     require plugin_dir_path(__FILE__) . "inc/countryRestrictionTab.php";
     require plugin_dir_path(__FILE__) . "inc/hideProducts.php";
     require plugin_dir_path(__FILE__) . "inc/mulipleCountryBasedRestriction.php";
+    require plugin_dir_path(__FILE__) . "inc/donationFieldInCheckout.php";
+    require plugin_dir_path(__FILE__) . "inc/recurringPriceAdd.php";
 }

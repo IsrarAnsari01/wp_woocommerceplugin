@@ -3,4 +3,7 @@ jQuery(document).ready(($) => {
   $(a).datepicker({
     dateFormat: "yy-mm-dd",
   });
+  $("#ia_donate_box").click(function () {
+    $("body").trigger("update_checkout");
+  });
 });
