@@ -7,6 +7,8 @@
 * Shipped order status
 * Shipped woocommerce email
 * Shipped woocommmerce email send to the customer when the order status equal to Shipped
+* Donation Checkbox at checkout form that will add 100Rs in product total if user checked
+* Add 100 rupees as a montly fees after signup in recurring products 
 * **Age Vise Restriction in Checkout form**
   - Configure Restriction Setting page where you can manually add states vise age limit for checkout form  
   - User get resistricted in checkout form if user age is less then restricted age  
