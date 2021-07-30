@@ -30,7 +30,7 @@ if (!defined("CW_ PLUGIN_VERSION")) {
 if (!defined("CW_PLUGIN_DIR")) {
     define("CW_PLUGIN_DIR", plugin_dir_url(__FILE__));
 }
- 
+
 // Define constant for directory path
 if (!defined("CWRFQ_PLUGIN_DIR")) {
     define("CWRFQ_PLUGIN_DIR", __DIR__);
@@ -52,5 +52,11 @@ if (in_array('woocommerce/woocommerce.php', $active_plugins) || array_key_exists
     require plugin_dir_path(__FILE__) . "inc/hideProducts.php";
     require plugin_dir_path(__FILE__) . "inc/mulipleCountryBasedRestriction.php";
     require plugin_dir_path(__FILE__) . "inc/donationFieldInCheckout.php";
+}
+if (
+    (in_array('woocommerce/woocommerce.php', $active_plugins) || array_key_exists('woocommerce/woocommerce.php', $active_plugins))
+    &&
+    (in_array('woocommerce-subscriptions/woocommerce-subscriptions.php', $active_plugins) || array_key_exists('woocommerce-subscriptions/woocommerce-subscriptions.php', $active_plugins))
+) {
     require plugin_dir_path(__FILE__) . "inc/recurringPriceAdd.php";
 }
